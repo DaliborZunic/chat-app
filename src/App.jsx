@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import {
   uniqueNamesGenerator,
   starWars,
+  adjectives
 } from "unique-names-generator";
 import MessageInput from "./components/MessageInput";
 import Messages from "./components/Messages";
@@ -15,7 +16,9 @@ function App() {
 
   const generateUsername = () =>
     uniqueNamesGenerator({
-      dictionaries: [starWars]
+      dictionaries: [adjectives, starWars],
+      length: 2,
+      separator: " "
     });
 
   const [currentMessage, setCurrentMessage] = useState({
