@@ -7,8 +7,12 @@ const Messages = () => {
 
   return (
     <div className="Messages">
-      {allMessages.map((message) => (
-        <Message messageBody = {message.messageBody} user = {message.user} />
+      {allMessages.map((message, index) => (
+        <Message
+          key={index}
+          messageBody={message.messageBody}
+          user={message.user}
+        />
       ))}
     </div>
   );

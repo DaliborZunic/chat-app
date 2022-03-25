@@ -12,7 +12,7 @@ const MessageInput = () => {
     setCurrentMessage({ ...currentMessage, messageBody: e.target.value });
   };
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     if (currentMessage.messageBody !== "") {
       setAllMessages([...allMessages, currentMessage]);
       setCurrentMessage({ ...currentMessage, messageBody: "" });
@@ -20,10 +20,10 @@ const MessageInput = () => {
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-        handleClick()
-      }
-  }
+    if (e.key === "Enter") {
+      handleClick();
+    }
+  };
 
   return (
     <div className="MessageInput">
