@@ -1,8 +1,8 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import {
   uniqueNamesGenerator,
   starWars,
-  adjectives
+  adjectives,
 } from "unique-names-generator";
 import MessageInput from "./components/MessageInput";
 import Messages from "./components/Messages";
@@ -13,13 +13,39 @@ export const CurrentMessageContext = createContext();
 export const AllMessagesContext = createContext();
 
 function App() {
-
   const generateUsername = () =>
     uniqueNamesGenerator({
       dictionaries: [adjectives, starWars],
       length: 2,
-      separator: " "
+      separator: " ",
     });
+
+  useEffect(() => {
+    const CHANNEL_ID = "ef5U3gbtGAc2hez6";
+    const drone = new window.ScaleDrone(CHANNEL_ID, {
+      data: {
+        // Will be sent out as clientData via events
+        name: "Dalibooor"
+      },
+    });
+
+    drone.on("open", (error) => {
+      if (error) {
+        return console.error(error);
+      }
+      console.log("Successfully connected to Scaledrone");
+
+      const room = drone.subscribe("observable-room");
+      room.on("open", (error) => {
+        if (error) {
+          return console.error(error);
+        }
+        console.log("Successfully joined room");
+      });
+
+      // More events code to follow..
+    });
+  }, []);
 
   const [currentMessage, setCurrentMessage] = useState({
     messageBody: "",
