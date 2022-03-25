@@ -1,10 +1,8 @@
-import React from 'react'
-
-const Message = () => {
+const Message = (props) => {
   return (
     <div className="Message">
-        <span className="message-sender">Sender</span>
-        <span className="message-body">Message content lorem ipsum</span>
+        <span className="message-sender">{props.user}</span>
+        <span className="message-body">{props.messageBody}</span>
       
     </div>
   )
