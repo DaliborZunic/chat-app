@@ -13,7 +13,6 @@ export const CurrentMessageContext = createContext();
 export const AllMessagesContext = createContext();
 
 function App() {
-
   const generateUsername = () =>
     uniqueNamesGenerator({
       dictionaries: [adjectives, starWars],
@@ -21,9 +20,11 @@ function App() {
       separator: " ",
     });
 
+  let username = generateUsername()
+
   const [drone, setDrone] = useState(
     new window.ScaleDrone("ef5U3gbtGAc2hez6", {
-      data: generateUsername()
+      data: username,
     })
   );
 
@@ -42,12 +43,14 @@ function App() {
         console.log("Successfully joined room");
       });
 
-      room.on('data', (data, member) => {
-        console.log(allMessages);
+      room.on("data", (data, member) => {
+        console.log(member);
+        console.log(drone);
 
-        setAllMessages(
-          (prevValues) => [...prevValues, {messageBody: data, userName: member}]
-        )
+        setAllMessages((prevValues) => [
+          ...prevValues,
+          { messageBody: data, userID: member.id, userName: member },
+        ]);
       });
 
       // More events code to follow..
@@ -59,20 +62,18 @@ function App() {
   const [allMessages, setAllMessages] = useState([]);
 
   return (
-
-      <AllMessagesContext.Provider value={{ allMessages, setAllMessages }}>
-        <CurrentMessageContext.Provider
-          value={{ currentMessage, setCurrentMessage }}
-        >
-          <div className="App">
-            <div className="main-container">
-              <Messages  />
-              <MessageInput drone = {drone} />
-            </div>
+    <AllMessagesContext.Provider value={{ allMessages, setAllMessages }}>
+      <CurrentMessageContext.Provider
+        value={{ currentMessage, setCurrentMessage }}
+      >
+        <div className="App">
+          <div className="main-container">
+            <Messages drone={drone} />
+            <MessageInput drone={drone} />
           </div>
-        </CurrentMessageContext.Provider>
-      </AllMessagesContext.Provider>
-
+        </div>
+      </CurrentMessageContext.Provider>
+    </AllMessagesContext.Provider>
   );
 }
 

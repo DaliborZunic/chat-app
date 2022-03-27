@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import Message from "./Message";
 import { AllMessagesContext } from "../App";
 
-const Messages = () => {
+const Messages = (props) => {
   const { allMessages, setAllMessages } = useContext(AllMessagesContext);
 
   return (
@@ -11,6 +11,7 @@ const Messages = () => {
 
           <Message
             key={index}
+            sentByMe = {props.drone.clientId === message.userID ? true : false}
             messageBody={message.messageBody}
             user={message.userName.clientData}
           />
