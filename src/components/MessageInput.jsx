@@ -1,7 +1,10 @@
-import { useContext } from "react";
-import { CurrentMessageContext, AllMessagesContext } from "../App";
+import { useContext, useEffect } from "react";
+import { DroneContext, CurrentMessageContext, AllMessagesContext } from "../App";
 
-const MessageInput = () => {
+const MessageInput = (props) => {
+
+
+
   const { currentMessage, setCurrentMessage } = useContext(
     CurrentMessageContext
   );
@@ -25,8 +28,15 @@ const MessageInput = () => {
     }
   };
 
+  useEffect( () => {
+    console.log(props.drone);
+  }, [] ) 
+
+
+
   return (
     <div className="MessageInput">
+
       <input
         placeholder="Upiši poruku..."
         type="text"

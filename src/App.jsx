@@ -13,6 +13,15 @@ export const CurrentMessageContext = createContext();
 export const AllMessagesContext = createContext();
 
 function App() {
+  const [drone, setDrone] = useState(
+    new window.ScaleDrone("ef5U3gbtGAc2hez6", {
+      data: {
+        // Will be sent out as clientData via events
+        name: "Dalibooor",
+      },
+    })
+  );
+
   const generateUsername = () =>
     uniqueNamesGenerator({
       dictionaries: [adjectives, starWars],
@@ -21,14 +30,6 @@ function App() {
     });
 
   useEffect(() => {
-    const CHANNEL_ID = "ef5U3gbtGAc2hez6";
-    const drone = new window.ScaleDrone(CHANNEL_ID, {
-      data: {
-        // Will be sent out as clientData via events
-        name: "Dalibooor"
-      },
-    });
-
     drone.on("open", (error) => {
       if (error) {
         return console.error(error);
@@ -55,18 +56,20 @@ function App() {
   const [allMessages, setAllMessages] = useState([]);
 
   return (
-    <AllMessagesContext.Provider value={{ allMessages, setAllMessages }}>
-      <CurrentMessageContext.Provider
-        value={{ currentMessage, setCurrentMessage }}
-      >
-        <div className="App">
-          <div className="main-container">
-            <Messages />
-            <MessageInput />
+
+      <AllMessagesContext.Provider value={{ allMessages, setAllMessages }}>
+        <CurrentMessageContext.Provider
+          value={{ currentMessage, setCurrentMessage }}
+        >
+          <div className="App">
+            <div className="main-container">
+              <Messages  />
+              <MessageInput drone = {drone} />
+            </div>
           </div>
-        </div>
-      </CurrentMessageContext.Provider>
-    </AllMessagesContext.Provider>
+        </CurrentMessageContext.Provider>
+      </AllMessagesContext.Provider>
+
   );
 }
 
