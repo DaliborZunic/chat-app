@@ -12,13 +12,19 @@ const MessageInput = (props) => {
   const { allMessages, setAllMessages } = useContext(AllMessagesContext);
 
   const handleChange = (e) => {
-    setCurrentMessage({ ...currentMessage, messageBody: e.target.value });
+    setCurrentMessage(e.target.value);
   };
 
   const handleClick = (e) => {
-    if (currentMessage.messageBody !== "") {
-      setAllMessages([...allMessages, currentMessage]);
-      setCurrentMessage({ ...currentMessage, messageBody: "" });
+    if (currentMessage !== "") {
+
+      props.drone.publish({
+        room: "observable-room",
+        message: currentMessage
+      })
+
+      setCurrentMessage("")
+
     }
   };
 
@@ -27,10 +33,6 @@ const MessageInput = (props) => {
       handleClick();
     }
   };
-
-  useEffect( () => {
-    console.log(props.drone);
-  }, [] ) 
 
 
 
@@ -42,7 +44,7 @@ const MessageInput = (props) => {
         type="text"
         onKeyPress={handleKeyPress}
         onChange={handleChange}
-        value={currentMessage.messageBody}
+        value={currentMessage}
       />
       <button onClick={handleClick}>POŠALJI</button>
     </div>

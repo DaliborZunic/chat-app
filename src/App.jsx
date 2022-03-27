@@ -13,14 +13,6 @@ export const CurrentMessageContext = createContext();
 export const AllMessagesContext = createContext();
 
 function App() {
-  const [drone, setDrone] = useState(
-    new window.ScaleDrone("ef5U3gbtGAc2hez6", {
-      data: {
-        // Will be sent out as clientData via events
-        name: "Dalibooor",
-      },
-    })
-  );
 
   const generateUsername = () =>
     uniqueNamesGenerator({
@@ -28,6 +20,12 @@ function App() {
       length: 2,
       separator: " ",
     });
+
+  const [drone, setDrone] = useState(
+    new window.ScaleDrone("ef5U3gbtGAc2hez6", {
+      data: generateUsername()
+    })
+  );
 
   useEffect(() => {
     drone.on("open", (error) => {
@@ -44,14 +42,19 @@ function App() {
         console.log("Successfully joined room");
       });
 
+      room.on('data', (data, member) => {
+        console.log(allMessages);
+
+        setAllMessages(
+          [...allMessages, {messageBody: data, userName: member}]
+        )
+      });
+
       // More events code to follow..
     });
   }, []);
 
-  const [currentMessage, setCurrentMessage] = useState({
-    messageBody: "",
-    user: generateUsername(),
-  });
+  const [currentMessage, setCurrentMessage] = useState("");
 
   const [allMessages, setAllMessages] = useState([]);
 
