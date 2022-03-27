@@ -46,7 +46,7 @@ function App() {
         console.log(allMessages);
 
         setAllMessages(
-          [...allMessages, {messageBody: data, userName: member}]
+          (prevValues) => [...prevValues, {messageBody: data, userName: member}]
         )
       });
 

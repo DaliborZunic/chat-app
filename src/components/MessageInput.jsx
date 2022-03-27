@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { DroneContext, CurrentMessageContext, AllMessagesContext } from "../App";
+import { DroneContext, CurrentMessageContext } from "../App";
 
 const MessageInput = (props) => {
 
@@ -8,8 +8,6 @@ const MessageInput = (props) => {
   const { currentMessage, setCurrentMessage } = useContext(
     CurrentMessageContext
   );
-
-  const { allMessages, setAllMessages } = useContext(AllMessagesContext);
 
   const handleChange = (e) => {
     setCurrentMessage(e.target.value);
