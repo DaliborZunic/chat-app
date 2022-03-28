@@ -81,33 +81,65 @@ body {
 }
 
 .Message {
-  background-color: #F5F5F5;
+  
   max-width: 80%;
-  padding: 20px 40px;
-  border-radius: 16px 16px 16px 0px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 
   &:first-child {
     margin-top: auto;
   }
 }
 
+.message-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.avatar {
+  width: 36px;
+  margin: 0px 12px 12px 12px;
+  align-self: start;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: #dee2e9;
+}
+
+.message-body {
+  padding: 20px 40px;
+  border-radius: 0px 16px 16px 16px;
+  background-color: #F5F5F5;
+}
+
 .sent-by-me {
-  background-color: #21978B;
-  border-radius: 16px 16px 0px 16px;
+  
   align-self: end;
-  color: #ffffff;
+  
+  .message-body {
+    background-color: #21978B;
+    border-radius: 16px 0px 16px 16px;
+    color: #ffffff;
+  }
+
+  .avatar-column {
+    order: 2
+  }
+
+  .message-column {
+    order: 1
+  }
 
   .message-sender {
     color: #282c34;
+    text-align: right;
   }
+
 }
 
 .message-sender {
-  color: #21978B;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 900;
+  margin-bottom: 10px;
 }
 
 .MessageInput {
