@@ -91,6 +91,12 @@ body {
   }
 }
 
+.message-timestamp {
+  color: #4F5665;
+  font-size: 11px;
+  margin-bottom: 3px;
+}
+
 .message-column {
   display: flex;
   flex-direction: column;
@@ -134,12 +140,16 @@ body {
     text-align: right;
   }
 
+  .message-timestamp {
+    text-align: right;
+  }
+
 }
 
 .message-sender {
   font-size: 16px;
   font-weight: 900;
-  margin-bottom: 10px;
+  margin-bottom: 3px;
 }
 
 .MessageInput {
