@@ -5,6 +5,7 @@ const Message = (props) => {
   };
 
   return (
+
     <div className= {`Message ${props.sentByMe === true ? "sent-by-me" : null}`}>
       <span className="message-sender">{props.user}</span>
       <span className="message-body">{props.messageBody}</span>

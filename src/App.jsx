@@ -53,7 +53,6 @@ function App() {
         ]);
       });
 
-      // More events code to follow..
     });
   }, []);
 
@@ -67,11 +66,24 @@ function App() {
         value={{ currentMessage, setCurrentMessage }}
       >
         <div className="App">
+
+
           <div className="main-container">
+
             <Messages drone={drone} />
             <MessageInput drone={drone} />
           </div>
+
         </div>
+
+
+
+
+
+
+
+
+
       </CurrentMessageContext.Provider>
     </AllMessagesContext.Provider>
   );

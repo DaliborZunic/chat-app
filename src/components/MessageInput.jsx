@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
 import { DroneContext, CurrentMessageContext } from "../App";
+import sendButton from "../images/send-icon.svg"
 
 const MessageInput = (props) => {
 
@@ -44,7 +45,7 @@ const MessageInput = (props) => {
         onChange={handleChange}
         value={currentMessage}
       />
-      <button onClick={handleClick}>POŠALJI</button>
+      <img onClick={handleClick} src={sendButton} alt="" />
     </div>
   );
 };
