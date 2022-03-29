@@ -15,6 +15,8 @@ export const AllMessagesContext = createContext();
 
 export const MyUserNameContext = createContext();
 
+export const MyChosenAvatarContext = createContext();
+
 function App() {
   const generateUsername = () =>
     uniqueNamesGenerator({
@@ -24,6 +26,8 @@ function App() {
     });
 
   const [myUserName, setMyUserName] = useState("")
+
+  const [myChosenAvatar, setMyChosenAvatar] = useState("")
 
   let username = generateUsername()
 
@@ -70,32 +74,39 @@ function App() {
     console.log(allMessages)
   }, [allMessages])
 
+
   return (
-    
 
-    <MyUserNameContext.Provider value={{ myUserName, setMyUserName }}>
+    <MyChosenAvatarContext.Provider value={{ myChosenAvatar, setMyChosenAvatar }}>
 
-      <AllMessagesContext.Provider value={{ allMessages, setAllMessages }}>
-        <CurrentMessageContext.Provider
-          value={{ currentMessage, setCurrentMessage }}
-        >
-          <div className="App">
-            <LogIn />
+      <MyUserNameContext.Provider value={{ myUserName, setMyUserName }}>
 
-            {/* <div className="main-container">
+        <AllMessagesContext.Provider value={{ allMessages, setAllMessages }}>
+          <CurrentMessageContext.Provider
+            value={{ currentMessage, setCurrentMessage }}
+          >
+            <div className="App">
+              <LogIn />
+
+              {/* <div className="main-container">
 
             <Messages drone={drone} />
             <MessageInput drone={drone} />
           </div> */}
 
-          </div>
+            </div>
 
 
-        </CurrentMessageContext.Provider>
-      </AllMessagesContext.Provider>
+          </CurrentMessageContext.Provider>
+        </AllMessagesContext.Provider>
 
 
-    </MyUserNameContext.Provider>
+      </MyUserNameContext.Provider>
+
+    </MyChosenAvatarContext.Provider>
+
+
+
 
 
   );
