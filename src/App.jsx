@@ -13,6 +13,8 @@ export const CurrentMessageContext = createContext();
 
 export const AllMessagesContext = createContext();
 
+export const MyUserNameContext = createContext();
+
 function App() {
   const generateUsername = () =>
     uniqueNamesGenerator({
@@ -20,6 +22,8 @@ function App() {
       length: 2,
       separator: " ",
     });
+
+  const [myUserName, setMyUserName] = useState("")
 
   let username = generateUsername()
 
@@ -56,42 +60,44 @@ function App() {
     });
   }, []);
 
-  
+
 
   const [currentMessage, setCurrentMessage] = useState("");
 
   const [allMessages, setAllMessages] = useState([]);
 
-  useEffect( () => {
+  useEffect(() => {
     console.log(allMessages)
-  }, [allMessages] )
+  }, [allMessages])
 
   return (
-    <AllMessagesContext.Provider value={{ allMessages, setAllMessages }}>
-      <CurrentMessageContext.Provider
-        value={{ currentMessage, setCurrentMessage }}
-      >
-        <div className="App">
-          <LogIn />
+    
 
-          {/* <div className="main-container">
+    <MyUserNameContext.Provider value={{ myUserName, setMyUserName }}>
+
+      <AllMessagesContext.Provider value={{ allMessages, setAllMessages }}>
+        <CurrentMessageContext.Provider
+          value={{ currentMessage, setCurrentMessage }}
+        >
+          <div className="App">
+            <LogIn />
+
+            {/* <div className="main-container">
 
             <Messages drone={drone} />
             <MessageInput drone={drone} />
           </div> */}
 
-        </div>
+          </div>
 
 
+        </CurrentMessageContext.Provider>
+      </AllMessagesContext.Provider>
 
 
+    </MyUserNameContext.Provider>
 
 
-
-
-
-      </CurrentMessageContext.Provider>
-    </AllMessagesContext.Provider>
   );
 }
 
