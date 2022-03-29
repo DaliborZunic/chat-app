@@ -18,19 +18,12 @@ const LogIn = () => {
         setMyUserName(e.target.value)
     }
 
-    useEffect( () => {
-        console.log(myUserName);
-    }, [myUserName] )
-
     const setAvatar = (myString) => {
 
         setMyChosenAvatar(myString)
 
     }
 
-    useEffect( ()=> {
-        console.log(myChosenAvatar);
-    }, [myChosenAvatar] )
 
     return (
         <div className="Login">
@@ -40,15 +33,15 @@ const LogIn = () => {
             <input className="username-input" type="text" value={myUserName} onChange={handleChange} />
             <div className="avatar-container">
 
-                <div onClick={() => setAvatar("astronaut")} className="avatar-item avatar-item-selected">
+                <div onClick={() => setAvatar("astronaut")} className={`avatar-item ${myChosenAvatar === "astronaut" ? "avatar-item-selected" : null}`}>
                     <img src={astronaut} alt="" />
                 </div>
 
-                <div onClick={() => setAvatar("ninja")} className="avatar-item">
+                <div onClick={() => setAvatar("ninja")} className={`avatar-item ${myChosenAvatar === "ninja" ? "avatar-item-selected" : null}`}>
                     <img src={ninja} alt="" />
                 </div>
 
-                <div onClick={() => setAvatar("detective")} className="avatar-item">
+                <div onClick={() => setAvatar("detective")} className={`avatar-item ${myChosenAvatar === "detective" ? "avatar-item-selected" : null}`}>
                     <img src={detective} alt="" />
                 </div>
 

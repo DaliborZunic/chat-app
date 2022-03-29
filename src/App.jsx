@@ -70,10 +70,6 @@ function App() {
 
   const [allMessages, setAllMessages] = useState([]);
 
-  useEffect(() => {
-    console.log(allMessages)
-  }, [allMessages])
-
 
   return (
 
