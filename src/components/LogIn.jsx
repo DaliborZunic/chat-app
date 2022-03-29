@@ -20,19 +20,21 @@ const LogIn = (props) => {
   };
 
   const handleOkButton = () => {
-    props.setDrone(
-      new window.ScaleDrone("ef5U3gbtGAc2hez6", {
-        data: {
-          myUserName,
-          myChosenAvatar,
-        },
-      })
-    );
+    if (myUserName && myChosenAvatar) {
+      props.setDrone(
+        new window.ScaleDrone("ef5U3gbtGAc2hez6", {
+          data: {
+            myUserName,
+            myChosenAvatar,
+          },
+        })
+      );
+    }
   };
 
-  useEffect( ()=> {
+  useEffect(() => {
     console.log(props.drone);
-  }, [props.drone] )
+  }, [props.drone]);
 
   return (
     <div className="Login">
@@ -75,7 +77,11 @@ const LogIn = (props) => {
         </div>
       </div>
 
-      <button onClick={handleOkButton} className="login-button">
+      <button
+        onClick={handleOkButton}
+        className="login-button"
+        style={{ opacity: myUserName && myChosenAvatar ? "1" : "0.5" }}
+      >
         OK
       </button>
     </div>
