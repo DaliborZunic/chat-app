@@ -15,7 +15,7 @@ const Message = (props) => {
       <div className="message-column">
 
         <span className="message-sender">{props.user}</span>
-        <span className="message-timestamp">09:00</span>
+        <span className="message-timestamp">{props.timestamp}</span>
         <span className="message-body">{props.messageBody}</span>
       </div>
 

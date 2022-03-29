@@ -13,6 +13,7 @@ const Messages = (props) => {
             key={index}
             sentByMe = {props.drone.clientId === message.userID ? true : false}
             messageBody={message.messageBody}
+            timestamp={message.timestamp}
             user={message.userName.clientData}
           />
 

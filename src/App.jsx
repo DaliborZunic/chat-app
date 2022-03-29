@@ -43,22 +43,27 @@ function App() {
         console.log("Successfully joined room");
       });
 
-      room.on("data", (data, member) => {
-        console.log(member);
-        console.log(drone);
+      room.on("message", (message) => {
+
 
         setAllMessages((prevValues) => [
           ...prevValues,
-          { messageBody: data, userID: member.id, userName: member },
+          { messageBody: message.data, userID: message.clientId, userName: message.member, timestamp: message.timestamp },
         ]);
       });
 
     });
   }, []);
 
+  
+
   const [currentMessage, setCurrentMessage] = useState("");
 
   const [allMessages, setAllMessages] = useState([]);
+
+  useEffect( () => {
+    console.log(allMessages)
+  }, [allMessages] )
 
   return (
     <AllMessagesContext.Provider value={{ allMessages, setAllMessages }}>
