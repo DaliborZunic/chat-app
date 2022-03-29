@@ -1,8 +1,22 @@
 const Message = (props) => {
-  const myMessageStyle = {
-    backgroundColor: "#10a887",
-    alignSelf: "end"
-  };
+
+  const formatTimestamp = (unixTimestamp) => {
+    const miliseconds = unixTimestamp * 1000
+    const dateObject = new Date(miliseconds)
+    const hours = addZero(dateObject.getHours().toString())  
+    const minutes = addZero(dateObject.getMinutes().toString())  
+
+    return `${hours}:${minutes}`
+  }
+
+  const addZero = (number) => {
+    if (number.length === 1) {
+      return `${0}${number}`
+    }
+    else {
+      return `${number}`
+    }
+  }
 
   return (
 
@@ -15,7 +29,7 @@ const Message = (props) => {
       <div className="message-column">
 
         <span className="message-sender">{props.user}</span>
-        <span className="message-timestamp">{props.timestamp}</span>
+        <span className="message-timestamp">{formatTimestamp(props.timestamp)}</span>
         <span className="message-body">{props.messageBody}</span>
       </div>
 
