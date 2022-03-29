@@ -4,6 +4,7 @@ import {
   starWars,
   adjectives,
 } from "unique-names-generator";
+import LogIn from "./components/LogIn";
 import MessageInput from "./components/MessageInput";
 import Messages from "./components/Messages";
 import "./styles/main.scss";
@@ -71,13 +72,13 @@ function App() {
         value={{ currentMessage, setCurrentMessage }}
       >
         <div className="App">
+          <LogIn />
 
-
-          <div className="main-container">
+          {/* <div className="main-container">
 
             <Messages drone={drone} />
             <MessageInput drone={drone} />
-          </div>
+          </div> */}
 
         </div>
 

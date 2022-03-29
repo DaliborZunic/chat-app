@@ -20,6 +20,63 @@ body {
   min-height: 100vh;
 }
 
+.Login {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  .heading {
+    font-size: 36px;
+    text-align: center;
+    max-width: 595px;
+  }
+
+  .description {
+    font-size: 16px;
+    margin-bottom: 50px;
+  }
+
+  .username-input {
+    border: 1px solid #E8E8E8;
+    border-radius: 24px;
+    padding: 0 20px;
+    width: 300px;
+    max-width: 100%;
+    height: 39px;
+    text-align: center;
+  }
+
+  .avatar-container {
+    display: flex;
+    gap: 10px;
+  }
+
+  .avatar-item {
+    cursor: pointer;
+    padding: 20px;
+    border-radius: 13px;
+  }
+
+  .avatar-item-selected {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+
+  .login-button {
+    cursor: pointer;
+    background-color: #21978B;
+    color: #ffffff;
+    border: none;
+    border-radius: 100px;
+    width: 294px;
+    max-width: 100%;
+    height: 61px;
+    margin-top: 50px;
+  }
+}
+
 .main-container {
   background-color: #ffffff;
   margin: 0 auto;
