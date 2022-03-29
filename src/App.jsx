@@ -69,12 +69,14 @@ function App() {
             value={{ currentMessage, setCurrentMessage }}
           >
             <div className="App">
-              <LogIn drone={drone} setDrone={setDrone} />
-
-              <div className="main-container">
-                <Messages drone={drone} />
-                <MessageInput drone={drone} />
-              </div>
+              {drone === "" ? (
+                <LogIn drone={drone} setDrone={setDrone} />
+              ) : (
+                <div className="main-container">
+                  <Messages drone={drone} />
+                  <MessageInput drone={drone} />
+                </div>
+              )}
             </div>
           </CurrentMessageContext.Provider>
         </AllMessagesContext.Provider>
