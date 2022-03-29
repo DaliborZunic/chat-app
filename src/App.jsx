@@ -18,93 +18,68 @@ export const MyUserNameContext = createContext();
 export const MyChosenAvatarContext = createContext();
 
 function App() {
-  const generateUsername = () =>
-    uniqueNamesGenerator({
-      dictionaries: [adjectives, starWars],
-      length: 2,
-      separator: " ",
-    });
+  const [myUserName, setMyUserName] = useState("");
 
-  const [myUserName, setMyUserName] = useState("")
+  const [myChosenAvatar, setMyChosenAvatar] = useState("");
 
-  const [myChosenAvatar, setMyChosenAvatar] = useState("")
-
-  let username = generateUsername()
-
-  const [drone, setDrone] = useState(
-    new window.ScaleDrone("ef5U3gbtGAc2hez6", {
-      data: username,
-    })
-  );
+  const [drone, setDrone] = useState("");
 
   useEffect(() => {
-    drone.on("open", (error) => {
-      if (error) {
-        return console.error(error);
-      }
-      console.log("Successfully connected to Scaledrone");
-
-      const room = drone.subscribe("observable-room");
-      room.on("open", (error) => {
+    if (drone !== "") {
+      drone.on("open", (error) => {
         if (error) {
           return console.error(error);
         }
-        console.log("Successfully joined room");
+        console.log("Successfully connected to Scaledrone");
+
+        const room = drone.subscribe("observable-room");
+        room.on("open", (error) => {
+          if (error) {
+            return console.error(error);
+          }
+          console.log("Successfully joined room");
+        });
+
+        room.on("message", (message) => {
+          setAllMessages((prevValues) => [
+            ...prevValues,
+            {
+              messageBody: message.data,
+              userID: message.clientId,
+              userName: message.member,
+              timestamp: message.timestamp,
+            },
+          ]);
+        });
       });
-
-      room.on("message", (message) => {
-
-
-        setAllMessages((prevValues) => [
-          ...prevValues,
-          { messageBody: message.data, userID: message.clientId, userName: message.member, timestamp: message.timestamp },
-        ]);
-      });
-
-    });
-  }, []);
-
-
+    }
+  }, [drone]);
 
   const [currentMessage, setCurrentMessage] = useState("");
 
   const [allMessages, setAllMessages] = useState([]);
 
-
   return (
-
-    <MyChosenAvatarContext.Provider value={{ myChosenAvatar, setMyChosenAvatar }}>
-
+    <MyChosenAvatarContext.Provider
+      value={{ myChosenAvatar, setMyChosenAvatar }}
+    >
       <MyUserNameContext.Provider value={{ myUserName, setMyUserName }}>
-
         <AllMessagesContext.Provider value={{ allMessages, setAllMessages }}>
           <CurrentMessageContext.Provider
             value={{ currentMessage, setCurrentMessage }}
           >
             <div className="App">
-              <LogIn />
+              <LogIn drone={drone} setDrone={setDrone} />
 
-              {/* <div className="main-container">
-
-            <Messages drone={drone} />
-            <MessageInput drone={drone} />
-          </div> */}
-
+              <div className="main-container">
+                <Messages drone={drone} />
+                <MessageInput drone={drone} />
+              </div>
             </div>
-
-
           </CurrentMessageContext.Provider>
         </AllMessagesContext.Provider>
-
-
       </MyUserNameContext.Provider>
-
     </MyChosenAvatarContext.Provider>
-
-
-
-
-
   );
 }
 
