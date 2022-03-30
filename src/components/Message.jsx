@@ -1,3 +1,7 @@
+import detective from "../images/detective.svg";
+import astronaut from "../images/astronaut.svg";
+import ninja from "../images/ninja.svg";
+
 const Message = (props) => {
 
   const formatTimestamp = (unixTimestamp) => {
@@ -18,12 +22,30 @@ const Message = (props) => {
     }
   }
 
+  const setAvatar = () => {
+    if (props.avatar === "detective") {
+      return detective
+    }
+
+    if (props.avatar === "astronaut") {
+      return astronaut
+    }
+
+    if (props.avatar === "ninja") {
+      return ninja
+    }
+  }
+
   return (
 
     <div className={`Message ${props.sentByMe === true ? "sent-by-me" : null}`}>
 
       <div className="avatar-column">
-        <div className="avatar"></div>
+
+        <div className="avatar">
+          <img className="avatar-icon" src={setAvatar()} alt="" />
+        </div>
+
       </div>
 
       <div className="message-column">

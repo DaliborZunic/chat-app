@@ -149,6 +149,7 @@ body {
   &:first-child {
     margin-top: auto;
   }
+
 }
 
 .message-timestamp {
@@ -168,7 +169,13 @@ body {
   align-self: start;
   aspect-ratio: 1;
   border-radius: 50%;
-  background-color: #dee2e9;
+  background-color: #eff1f5;
+  display: flex;
+
+  .avatar-icon {
+    width: 50%;
+    margin: auto;
+  }
 }
 
 .message-body {
