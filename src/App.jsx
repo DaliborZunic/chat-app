@@ -8,6 +8,7 @@ import LogIn from "./components/LogIn";
 import MessageInput from "./components/MessageInput";
 import Messages from "./components/Messages";
 import "./styles/main.scss";
+import { Scrollbars } from 'react-custom-scrollbars-2';
 
 export const CurrentMessageContext = createContext();
 
@@ -73,7 +74,13 @@ function App() {
                 <LogIn drone={drone} setDrone={setDrone} />
               ) : (
                 <div className="main-container">
-                  <Messages drone={drone} />
+
+                  <Scrollbars>
+
+                    <Messages drone={drone} />
+                  </Scrollbars>
+
+
                   <MessageInput drone={drone} />
                 </div>
               )}

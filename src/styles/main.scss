@@ -108,11 +108,11 @@ body {
 .Messages {
   background-color: #ffffff;
   flex: 1;
+  height: calc(100vh - 64px);
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  overflow-y: scroll;
   align-items: start;
   scrollbar-width: none;
 
