@@ -1,10 +1,12 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DroneContext, CurrentMessageContext } from "../App";
-import sendButton from "../images/send-icon.svg"
+import sendButton from "../images/send-icon.svg";
+import emojiIcon from "../images/emoji-icon.svg";
+import Picker from 'emoji-picker-react';
 
 const MessageInput = (props) => {
 
-
+  const [emojiPickerShown, setEmojiPickerShown] = useState(false)
 
   const { currentMessage, setCurrentMessage } = useContext(
     CurrentMessageContext
@@ -33,6 +35,10 @@ const MessageInput = (props) => {
     }
   };
 
+  const handleEmojiIcon = () => {
+    setEmojiPickerShown(!emojiPickerShown)
+  }
+
 
 
   return (
@@ -45,6 +51,12 @@ const MessageInput = (props) => {
         onChange={handleChange}
         value={currentMessage}
       />
+
+      {
+        emojiPickerShown && <Picker />
+      }
+      <img className="emoji-icon" onClick={handleEmojiIcon} src={emojiIcon} alt="" />
+
       <img onClick={handleClick} src={sendButton} alt="" />
     </div>
   );

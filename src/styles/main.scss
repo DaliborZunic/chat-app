@@ -224,11 +224,12 @@ body {
   display: flex;
   align-items: center;
   min-height: 64px;
+  position: relative;
 
   input {
     height: 60%;
     max-width: 93%;
-    margin: 0 20px;
+    margin: 0 10px;
     flex: 1;
     border: none;
     padding: 10px 20px;
@@ -246,4 +247,15 @@ body {
     background-color: #10a887;
     color: #fff;
   }
+}
+
+.emoji-picker-react {
+  position: absolute !important;
+  bottom: 50px;
+  right: 0
+}
+
+.emoji-icon {
+  margin: 0 20px;
+  margin-left: 10px
 }
