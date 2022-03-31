@@ -39,6 +39,11 @@ const MessageInput = (props) => {
     setEmojiPickerShown(!emojiPickerShown)
   }
 
+  const onEmojiClick = (event, emojiObject) => {
+    console.log(emojiObject);
+    setCurrentMessage((prevValue) => `${prevValue}${emojiObject.emoji}`)
+  }
+
 
 
   return (
@@ -53,7 +58,7 @@ const MessageInput = (props) => {
       />
 
       {
-        emojiPickerShown && <Picker />
+        emojiPickerShown && <Picker onEmojiClick={onEmojiClick} />
       }
       <img className="emoji-icon" onClick={handleEmojiIcon} src={emojiIcon} alt="" />
 
