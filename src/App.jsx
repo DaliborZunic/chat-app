@@ -52,6 +52,18 @@ function App() {
             },
           ]);
         });
+
+        room.on('members', (members) => {
+          console.log("Active users", members);
+        });
+
+        room.on('member_join', (member) => {
+          console.log(`${member.clientData.myUserName} joined the room`);
+        });
+
+        room.on('member_leave', (member) => {
+          console.log(`${member.clientData.myUserName} left the room`);
+        });
       });
     }
   }, [drone]);
