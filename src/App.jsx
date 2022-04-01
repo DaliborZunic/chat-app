@@ -23,6 +23,8 @@ function App() {
   const [myUserName, setMyUserName] = useState("");
 
   const [myChosenAvatar, setMyChosenAvatar] = useState("");
+  
+  const [activeUsers, setActiveUsers] = useState([]);
 
   const [drone, setDrone] = useState("");
 
@@ -55,15 +57,17 @@ function App() {
         });
 
         room.on("members", (members) => {
-          console.log("Active users", members);
+          setActiveUsers(members)
         });
 
         room.on("member_join", (member) => {
           console.log(`${member.clientData.myUserName} joined the room`);
+          setActiveUsers( prevValues => [...prevValues, member])
         });
-
+        
         room.on("member_leave", (member) => {
           console.log(`${member.clientData.myUserName} left the room`);
+          setActiveUsers( (prevValues) => prevValues.filter(user => user.id !== member.id));
         });
       });
     }
