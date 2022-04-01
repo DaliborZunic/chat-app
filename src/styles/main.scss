@@ -86,9 +86,24 @@ body {
   max-width: 1000px;
   height: 100vh;
   display: flex;
-  flex-direction: column;
   overflow: hidden;
   position: relative;
+
+  .sidebar-wrapper {
+    flex: 0 1 300px;
+  }
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+}
+
+.Sidebar {
+  height: calc(100% - 35px);
+  margin: 20px 0;
+  border-right: 1px solid #ece7e7;
 }
 
 .column-right {

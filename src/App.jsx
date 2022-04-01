@@ -8,7 +8,8 @@ import LogIn from "./components/LogIn";
 import MessageInput from "./components/MessageInput";
 import Messages from "./components/Messages";
 import "./styles/main.scss";
-import { Scrollbars } from 'react-custom-scrollbars-2';
+import { Scrollbars } from "react-custom-scrollbars-2";
+import Sidebar from "./components/Sidebar";
 
 export const CurrentMessageContext = createContext();
 
@@ -53,15 +54,15 @@ function App() {
           ]);
         });
 
-        room.on('members', (members) => {
+        room.on("members", (members) => {
           console.log("Active users", members);
         });
 
-        room.on('member_join', (member) => {
+        room.on("member_join", (member) => {
           console.log(`${member.clientData.myUserName} joined the room`);
         });
 
-        room.on('member_leave', (member) => {
+        room.on("member_leave", (member) => {
           console.log(`${member.clientData.myUserName} left the room`);
         });
       });
@@ -86,14 +87,18 @@ function App() {
                 <LogIn drone={drone} setDrone={setDrone} />
               ) : (
                 <div className="main-container">
+                  <div className="sidebar-wrapper">
 
-                  <Scrollbars>
+                    <Sidebar />
+                  </div>
 
-                    <Messages drone={drone} />
-                  </Scrollbars>
+                  <div className="content-wrapper">
+                    <Scrollbars>
+                      <Messages drone={drone} />
+                    </Scrollbars>
 
-
-                  <MessageInput drone={drone} />
+                    <MessageInput drone={drone} />
+                  </div>
                 </div>
               )}
             </div>
