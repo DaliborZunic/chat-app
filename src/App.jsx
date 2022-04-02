@@ -93,7 +93,7 @@ function App() {
                 <div className="main-container">
                   <div className="sidebar-wrapper">
 
-                    <Sidebar />
+                    <Sidebar activeUsers={activeUsers} />
                   </div>
 
                   <div className="content-wrapper">
