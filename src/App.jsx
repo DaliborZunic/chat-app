@@ -10,6 +10,8 @@ import Messages from "./components/Messages";
 import "./styles/main.scss";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import Sidebar from "./components/Sidebar";
+import hamburger from "./images/hamburger.svg";
+import close from "./images/close.svg";
 
 export const CurrentMessageContext = createContext();
 
@@ -27,6 +29,8 @@ function App() {
   const [activeUsers, setActiveUsers] = useState([]);
 
   const [drone, setDrone] = useState("");
+
+  const [showMobileSidebar, setShowMobileSidebar] = useState(false);
 
   useEffect(() => {
     if (drone !== "") {
@@ -73,6 +77,10 @@ function App() {
     }
   }, [drone]);
 
+  const handleMobileToggle = () => {
+    setShowMobileSidebar(!showMobileSidebar)
+  }
+
 
   const [currentMessage, setCurrentMessage] = useState("");
 
@@ -92,7 +100,11 @@ function App() {
                 <LogIn drone={drone} setDrone={setDrone} />
               ) : (
                 <div className="main-container">
-                  <div className="sidebar-wrapper">
+                  <button onClick={handleMobileToggle} className="mobileToggle">
+                    <img className="hamburger-icon" src={showMobileSidebar ? close : hamburger} alt="" />
+                    </button>
+
+                  <div className={`sidebar-wrapper ${showMobileSidebar ? "show-sidebar-wrapper" : ""}`}>
 
                     <Sidebar drone={drone} activeUsers={activeUsers} />
                   </div>
