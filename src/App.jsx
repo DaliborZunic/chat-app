@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   uniqueNamesGenerator,
   starWars,
@@ -73,6 +73,7 @@ function App() {
     }
   }, [drone]);
 
+
   const [currentMessage, setCurrentMessage] = useState("");
 
   const [allMessages, setAllMessages] = useState([]);
@@ -93,7 +94,7 @@ function App() {
                 <div className="main-container">
                   <div className="sidebar-wrapper">
 
-                    <Sidebar activeUsers={activeUsers} />
+                    <Sidebar drone={drone} activeUsers={activeUsers} />
                   </div>
 
                   <div className="content-wrapper">

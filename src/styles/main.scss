@@ -274,3 +274,40 @@ body {
   margin: 0 20px;
   margin-left: 10px
 }
+
+.ActiveUser {
+  background-color: #F5F5F5;
+  margin: 10px;
+  padding-left: 10px;
+  height: 50px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .sidebar-username {
+    font-weight: 900;
+    color: #141414;
+  }
+  
+  .sidebar-avatar-frame {
+    height: 60%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: flex;
+    background-color: #fff;
+  }
+
+  .active-user-avatar-icon {
+    height: 60%;
+    margin: auto;
+  }
+}
+
+.currentUser {
+  background-color: #21978B;
+
+  .sidebar-username {
+    color: #fff;
+  }
+}
