@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useRef } from "react";
 import {
   uniqueNamesGenerator,
   starWars,
@@ -25,12 +25,14 @@ function App() {
   const [myUserName, setMyUserName] = useState("");
 
   const [myChosenAvatar, setMyChosenAvatar] = useState("");
-  
+
   const [activeUsers, setActiveUsers] = useState([]);
 
   const [drone, setDrone] = useState("");
 
   const [showMobileSidebar, setShowMobileSidebar] = useState(false);
+
+  const scrollAnchor = useRef(null);
 
   useEffect(() => {
     if (drone !== "") {
@@ -58,33 +60,36 @@ function App() {
               timestamp: message.timestamp,
             },
           ]);
+          scrollAnchor.current.scrollIntoView({behavior: "smooth"})
         });
 
         room.on("members", (members) => {
-          setActiveUsers(members)
+          setActiveUsers(members);
         });
 
         room.on("member_join", (member) => {
           console.log(`${member.clientData.myUserName} joined the room`);
-          setActiveUsers( prevValues => [...prevValues, member])
+          setActiveUsers((prevValues) => [...prevValues, member]);
         });
-        
+
         room.on("member_leave", (member) => {
           console.log(`${member.clientData.myUserName} left the room`);
-          setActiveUsers( (prevValues) => prevValues.filter(user => user.id !== member.id));
+          setActiveUsers((prevValues) =>
+            prevValues.filter((user) => user.id !== member.id)
+          );
         });
       });
     }
   }, [drone]);
 
   const handleMobileToggle = () => {
-    setShowMobileSidebar(!showMobileSidebar)
-  }
-
+    setShowMobileSidebar(!showMobileSidebar);
+  };
 
   const [currentMessage, setCurrentMessage] = useState("");
 
   const [allMessages, setAllMessages] = useState([]);
+
 
   return (
     <MyChosenAvatarContext.Provider
@@ -101,17 +106,25 @@ function App() {
               ) : (
                 <div className="main-container">
                   <button onClick={handleMobileToggle} className="mobileToggle">
-                    <img className="hamburger-icon" src={showMobileSidebar ? close : hamburger} alt="" />
-                    </button>
+                    <img
+                      className="hamburger-icon"
+                      src={showMobileSidebar ? close : hamburger}
+                      alt=""
+                    />
+                  </button>
 
-                  <div className={`sidebar-wrapper ${showMobileSidebar ? "show-sidebar-wrapper" : ""}`}>
-
+                  <div
+                    className={`sidebar-wrapper ${
+                      showMobileSidebar ? "show-sidebar-wrapper" : ""
+                    }`}
+                  >
                     <Sidebar drone={drone} activeUsers={activeUsers} />
                   </div>
 
                   <div className="content-wrapper">
                     <Scrollbars>
                       <Messages drone={drone} />
+                      <div ref={scrollAnchor} className="scrollAnchor"></div>
                     </Scrollbars>
 
                     <MessageInput drone={drone} />
