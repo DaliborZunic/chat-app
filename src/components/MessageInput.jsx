@@ -62,7 +62,7 @@ const MessageInput = (props) => {
       }
       <img className="emoji-icon" onClick={handleEmojiIcon} src={emojiIcon} alt="" />
 
-      <img onClick={handleClick} src={sendButton} alt="" />
+      <img className="send-button" onClick={handleClick} src={sendButton} alt="" />
     </div>
   );
 };
