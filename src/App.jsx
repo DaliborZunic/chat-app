@@ -119,13 +119,13 @@ function App() {
 
   useEffect(() => {
     if (prevCurrentMessage !== undefined) {
-      if (prevCurrentMessage.length === 0 && currentMessage.length === 1) {
+      if (prevCurrentMessage.length === 0 && currentMessage.length !== 0) {
         drone.publish({
           room: "observable-room",
           message: { isTyping: true },
         });
       } else if (
-        prevCurrentMessage.length === 1 &&
+        prevCurrentMessage.length !== 0 &&
         currentMessage.length === 0
       ) {
         drone.publish({
