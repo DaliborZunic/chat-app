@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/chat-app/static/css/main.e716ad0c.css",
-    "main.js": "/chat-app/static/js/main.eada701f.js",
+    "main.css": "/chat-app/static/css/main.6a1bb5d6.css",
+    "main.js": "/chat-app/static/js/main.4470a317.js",
     "static/media/astronaut.svg": "/chat-app/static/media/astronaut.8da667b490671ed605e5bd3ac126124d.svg",
     "static/media/detective.svg": "/chat-app/static/media/detective.7e1b1053d4db40e5b0f52a5fb28f79f6.svg",
     "static/media/emoji-icon.svg": "/chat-app/static/media/emoji-icon.abaaa7cda329b0858373c18a5e1193d7.svg",
@@ -10,11 +10,11 @@
     "static/media/send-icon.svg": "/chat-app/static/media/send-icon.cd9c0b0c5fa56762ac02264706039013.svg",
     "static/media/close.svg": "/chat-app/static/media/close.ce2bd3d73566fa16d9adf53872f91330.svg",
     "static/media/hamburger.svg": "/chat-app/static/media/hamburger.fa0391d8c9a041bce335dd3bc899a9eb.svg",
-    "main.e716ad0c.css.map": "/chat-app/static/css/main.e716ad0c.css.map",
-    "main.eada701f.js.map": "/chat-app/static/js/main.eada701f.js.map"
+    "main.6a1bb5d6.css.map": "/chat-app/static/css/main.6a1bb5d6.css.map",
+    "main.4470a317.js.map": "/chat-app/static/js/main.4470a317.js.map"
   },
   "entrypoints": [
-    "static/css/main.e716ad0c.css",
-    "static/js/main.eada701f.js"
+    "static/css/main.6a1bb5d6.css",
+    "static/js/main.4470a317.js"
   ]
 }
