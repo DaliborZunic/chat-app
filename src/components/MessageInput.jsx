@@ -26,6 +26,11 @@ const MessageInput = (props) => {
 
       setCurrentMessage("")
 
+      props.drone.publish({
+        room: "observable-room",
+        message: { isTyping: false },
+      });
+
     }
   };
 
