@@ -26,6 +26,7 @@ const ActiveUser = (props) => {
         </div>
       
       <span className="sidebar-username">{props.username}</span>
+      <span>{props.currentlyTyping.includes(props.activeUser) ? "is typing" : ""}</span>
     </div>
   );
 };

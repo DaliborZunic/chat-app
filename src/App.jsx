@@ -137,8 +137,8 @@ function App() {
   }, [currentMessage]);
 
   useEffect(() => {
-    console.log(currentlyTyping);
-  }, [currentlyTyping]);
+    console.log(drone);
+  }, [drone]);
 
   return (
     <MyChosenAvatarContext.Provider
@@ -167,7 +167,7 @@ function App() {
                       showMobileSidebar ? "show-sidebar-wrapper" : ""
                     }`}
                   >
-                    <Sidebar drone={drone} activeUsers={activeUsers} />
+                    <Sidebar currentlyTyping={currentlyTyping} drone={drone} activeUsers={activeUsers} />
                   </div>
 
                   <div className="content-wrapper">
