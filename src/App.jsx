@@ -32,6 +32,8 @@ function App() {
 
   const [showMobileSidebar, setShowMobileSidebar] = useState(false);
 
+  const [currentlyTyping, setCurrentlyTyping] = useState([]);
+
   const scrollAnchor = useRef(null);
 
   useEffect(() => {
@@ -53,7 +55,16 @@ function App() {
         room.on("message", (message) => {
           if (message.data) {
             if (message.data.hasOwnProperty("isTyping")) {
-              console.log("Typing tracking occurred");
+              if (message.data.isTyping) {
+                setCurrentlyTyping((prevValues) => [
+                  ...prevValues,
+                  message.member.id,
+                ]);
+              } else {
+                setCurrentlyTyping((prevValues) =>
+                  prevValues.filter((value) => value !== message.member.id)
+                );
+              }
             } else {
               setAllMessages((prevValues) => [
                 ...prevValues,
@@ -107,12 +118,11 @@ function App() {
   const prevCurrentMessage = usePreviousValue(currentMessage);
 
   useEffect(() => {
-
     if (prevCurrentMessage !== undefined) {
-      if (currentMessage.length === 1) {
+      if (prevCurrentMessage.length === 0 && currentMessage.length === 1) {
         drone.publish({
           room: "observable-room",
-          message: {isTyping: true},
+          message: { isTyping: true },
         });
       } else if (
         prevCurrentMessage.length === 1 &&
@@ -120,11 +130,15 @@ function App() {
       ) {
         drone.publish({
           room: "observable-room",
-          message: {isTyping: false},
+          message: { isTyping: false },
         });
       }
     }
   }, [currentMessage]);
+
+  useEffect(() => {
+    console.log(currentlyTyping);
+  }, [currentlyTyping]);
 
   return (
     <MyChosenAvatarContext.Provider
